@@ -164,6 +164,9 @@ private fun ZoomGestureCallbackDemo(imageBitmap: ImageBitmap) {
                 },
                 onGestureEnd = {
                     text = "onGestureEnd data: $it"
+                },
+                onTap = {
+                    text = "onTap data: $it"
                 }
             ),
         bitmap = imageBitmap,

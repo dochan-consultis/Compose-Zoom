@@ -5,10 +5,10 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.composed
 import androidx.compose.ui.draw.clipToBounds
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.input.pointer.pointerInput
 import com.smarttoolfactory.gesture.detectTransformGestures
-import com.smarttoolfactory.gesture.pointerMotionEvents
 import com.smarttoolfactory.zoom.util.calculateZoom
 import com.smarttoolfactory.zoom.util.update
 import kotlinx.coroutines.launch
@@ -38,7 +38,8 @@ fun Modifier.zoom(
     zoomState: ZoomState,
     onGestureStart: ((ZoomData) -> Unit)? = null,
     onGesture: ((ZoomData) -> Unit)? = null,
-    onGestureEnd: ((ZoomData) -> Unit)? = null
+    onGestureEnd: ((ZoomData) -> Unit)? = null,
+    onTap: ((Offset) -> Unit)? = null
 ) = composed(
     factory = {
         val coroutineScope = rememberCoroutineScope()
@@ -103,6 +104,12 @@ fun Modifier.zoom(
                             rotation = zoomState.rotationInitial
                         )
                     }
+                },
+                onTap = {
+                    val x = ((zoomState.zoom * zoomState.pan.x + zoomState.size.width/2) - it.x) / -zoomState.zoom
+                    val y = (it.y - zoomState.pan.y/2) / zoomState.zoom
+
+                    onTap?.invoke(Offset(x, y))
                 }
             )
         }
