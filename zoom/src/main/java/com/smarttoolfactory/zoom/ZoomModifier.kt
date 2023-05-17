@@ -105,9 +105,9 @@ fun Modifier.zoom(
                         )
                     }
                 },
-                onTap = { offset ->
-                    val x = (offset.x - zoomState.pan.x) / zoomState.zoom
-                    val y = (offset.y - zoomState.pan.y) / zoomState.zoom
+                onTap = {
+                    val x = ((zoomState.zoom * zoomState.pan.x + zoomState.size.width/2) - it.x) / -zoomState.zoom
+                    val y = (it.y - zoomState.pan.y/2) / zoomState.zoom
 
                     onTap?.invoke(Offset(x, y))
                 }
