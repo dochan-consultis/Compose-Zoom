@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace 'com.smarttoolfactory.composezoom'
+    namespace 'com.consultis.composezoom'
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.smarttoolfactory.composezoom"
+        applicationId "com.consultis.composezoom"
         minSdk 21
         targetSdk 33
         versionCode 1
