@@ -1,6 +1,6 @@
 # Compose Zoom
 
-[![](https://jitpack.io/v/SmartToolFactory/Compose-Zoom.svg)](https://jitpack.io/#SmartToolFactory/Compose-Zoom)
+[![](https://jitpack.io/v/dochan-consultis/Compose-Zoom.svg)](https://jitpack.io/#dochan-consultis/Compose-Zoom)
 
 Zoom Modifiers, zoomable image and layouts with limit pan bounds, fling and moving back to
 valid bounds and callbacks that return current transformation or visible image section
