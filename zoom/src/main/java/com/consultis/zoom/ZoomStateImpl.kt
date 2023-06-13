@@ -108,7 +108,7 @@ open class ZoomState(
         snapRotationTo(newRotation)
 
         if (pannable) {
-            val newPan = this.pan + panChange.times(this.zoom)
+            val newPan = this.pan + panChange
             val boundPan = limitPan && !rotatable
 
             if (boundPan) {
