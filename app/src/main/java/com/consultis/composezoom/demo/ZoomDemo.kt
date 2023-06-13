@@ -157,7 +157,8 @@ private fun ZoomGestureCallbackDemo(imageBitmap: ImageBitmap) {
         )
     }
 
-    Image(
+
+    Canvas(
         modifier = Modifier
             .background(Color.LightGray)
             .fillMaxWidth()
@@ -170,25 +171,15 @@ private fun ZoomGestureCallbackDemo(imageBitmap: ImageBitmap) {
                 ),
                 clip = true,
                 consume = true,
-                onGestureStart = {
-                    text = "onGestureStart data: $it"
-                },
-                onGesture = {
-                    text = "onGesture data: $it"
-
-
-                },
-                onGestureEnd = {
-                    text = "onGestureEnd data: $it"
-                },
                 onTap = {
                     text = "onTap data: $it"
                 }
             ),
-        bitmap = imageBitmap,
-        contentDescription = "",
-        contentScale = ContentScale.FillBounds
-    )
+    ) {
+        drawCircle(
+            color= Color.Red,
+        )
+    }
 
     Text(text)
 }
