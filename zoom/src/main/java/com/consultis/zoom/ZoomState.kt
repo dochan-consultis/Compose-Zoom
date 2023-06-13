@@ -2,6 +2,7 @@ package com.consultis.zoom
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
+import androidx.compose.ui.geometry.Offset
 
 /**
  * * Create and [remember] the [ZoomState] based on the currently appropriate transform
@@ -31,6 +32,7 @@ fun rememberZoomState(
     pannable: Boolean = true,
     rotatable: Boolean = false,
     limitPan: Boolean = false,
+    initialPan: Offset = Offset(x= 0f, y= 0f),
     key1: Any? = Unit
 ): ZoomState {
     return remember(key1) {
@@ -42,7 +44,8 @@ fun rememberZoomState(
             zoomable = zoomable,
             pannable = pannable,
             rotatable = rotatable,
-            limitPan = limitPan
+            limitPan = limitPan,
+            initialPan = initialPan
         )
     }
 }
@@ -75,6 +78,7 @@ fun rememberZoomState(
     pannable: Boolean = true,
     rotatable: Boolean = false,
     limitPan: Boolean = false,
+    initialPan: Offset = Offset(x= 0f, y= 0f),
     key1: Any?,
     key2: Any?,
 ): ZoomState {
@@ -87,7 +91,8 @@ fun rememberZoomState(
             zoomable = zoomable,
             pannable = pannable,
             rotatable = rotatable,
-            limitPan = limitPan
+            limitPan = limitPan,
+            initialPan = initialPan
         )
     }
 }
@@ -119,6 +124,7 @@ fun rememberZoomState(
     pannable: Boolean = true,
     rotatable: Boolean = false,
     limitPan: Boolean = false,
+    initialPan: Offset = Offset(x= 0f, y= 0f),
     vararg keys: Any?
 ): ZoomState {
     return remember(*keys) {
@@ -130,7 +136,8 @@ fun rememberZoomState(
             zoomable = zoomable,
             pannable = pannable,
             rotatable = rotatable,
-            limitPan = limitPan
+            limitPan = limitPan,
+            initialPan = initialPan
         )
     }
 }

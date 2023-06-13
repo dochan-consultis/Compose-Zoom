@@ -25,6 +25,7 @@ open class ZoomState(
     initialRotation: Float = 0f,
     minZoom: Float = 1f,
     maxZoom: Float = 5f,
+    initialPan: Offset = Offset(x= 0f, y= 0f),
     internal open val zoomable: Boolean = true,
     internal open val pannable: Boolean = true,
     internal open val rotatable: Boolean = true,
@@ -36,8 +37,8 @@ open class ZoomState(
     internal val zoomInitial = initialZoom.coerceIn(zoomMin, zoomMax)
     internal val rotationInitial = initialRotation % 360
 
-    internal val animatablePanX = Animatable(0f)
-    internal val animatablePanY = Animatable(0f)
+    internal val animatablePanX = Animatable(initialPan.x)
+    internal val animatablePanY = Animatable(initialPan.y)
     internal val animatableZoom = Animatable(zoomInitial)
     internal val animatableRotation = Animatable(rotationInitial)
 
