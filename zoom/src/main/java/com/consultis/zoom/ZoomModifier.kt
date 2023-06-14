@@ -9,9 +9,9 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.composed
 import androidx.compose.ui.draw.clipToBounds
-import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.input.pointer.pointerInput
+import com.consultis.zoom.util.TappedPoint
 import com.consultis.zoom.util.update
 import com.smarttoolfactory.gesture.detectTransformGestures
 import kotlinx.coroutines.launch
@@ -42,7 +42,7 @@ fun Modifier.zoom(
     onGestureStart: ((ZoomData) -> Unit)? = null,
     onGesture: ((ZoomData) -> Unit)? = null,
     onGestureEnd: ((ZoomData) -> Unit)? = null,
-    onTap: ((Offset) -> Unit)? = null
+    onTap: ((TappedPoint) -> Unit)? = null
 ) = composed(
     factory = {
         val coroutineScope = rememberCoroutineScope()
@@ -91,10 +91,10 @@ fun Modifier.zoom(
             zoomState.size = this.size
             detectTapGestures(
                 onTap = { offset ->
-                    val x = (offset.x - zoomState.pan.x) / zoomState.zoom
-                    val y = (offset.y - zoomState.pan.y) / zoomState.zoom
+                    val x = (offset.x.toDouble() - zoomState.pan.x) / zoomState.zoom
+                    val y = (offset.y.toDouble() - zoomState.pan.y) / zoomState.zoom
 
-                    onTap?.invoke(Offset(x, y))
+                    onTap?.invoke(TappedPoint(x, y))
                 }
             )
         }
@@ -150,7 +150,7 @@ fun Modifier.zoom(
     onGestureStart: ((ZoomData) -> Unit)? = null,
     onGesture: ((ZoomData) -> Unit)? = null,
     onGestureEnd: ((ZoomData) -> Unit)? = null,
-    onTap: ((Offset) -> Unit)? = null
+    onTap: ((TappedPoint) -> Unit)? = null
 ) = composed(
     factory = {
         val coroutineScope = rememberCoroutineScope()
@@ -198,10 +198,10 @@ fun Modifier.zoom(
             zoomState.size = this.size
             detectTapGestures(
                 onTap = { offset ->
-                    val x = (offset.x - zoomState.pan.x) / zoomState.zoom
-                    val y = (offset.y - zoomState.pan.y) / zoomState.zoom
+                    val x = (offset.x.toDouble() - zoomState.pan.x) / zoomState.zoom
+                    val y = (offset.y.toDouble() - zoomState.pan.y) / zoomState.zoom
 
-                    onTap?.invoke(Offset(x, y))
+                    onTap?.invoke(TappedPoint(x, y))
                 }
             )
         }
@@ -257,7 +257,7 @@ fun Modifier.zoom(
     onGestureStart: ((ZoomData) -> Unit)? = null,
     onGesture: ((ZoomData) -> Unit)? = null,
     onGestureEnd: ((ZoomData) -> Unit)? = null,
-    onTap: ((Offset) -> Unit)? = null
+    onTap: ((TappedPoint) -> Unit)? = null
 ) = composed(
     factory = {
         val coroutineScope = rememberCoroutineScope()
@@ -305,10 +305,10 @@ fun Modifier.zoom(
             zoomState.size = this.size
             detectTapGestures(
                 onTap = { offset ->
-                    val x = (offset.x - zoomState.pan.x) / zoomState.zoom
-                    val y = (offset.y - zoomState.pan.y) / zoomState.zoom
+                    val x = (offset.x.toDouble() - zoomState.pan.x) / zoomState.zoom
+                    val y = (offset.y.toDouble() - zoomState.pan.y) / zoomState.zoom
 
-                    onTap?.invoke(Offset(x, y))
+                    onTap?.invoke(TappedPoint(x, y))
                 }
             )
         }
