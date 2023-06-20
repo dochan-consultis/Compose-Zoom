@@ -96,9 +96,9 @@ fun Modifier.zoom(
                     val zoom = zoomState.zoom
 
                     val toCanvasX =
-                        convertCanvasCoordinate(offset.x.toDouble() - (zoomState.pan.x), (width * zoom) / 2)
+                        convertCanvasCoordinate(offset.x.toDouble() - zoomState.pan.x, (width * zoom) / 2)
                     val toCanvasY =
-                        convertCanvasCoordinate(offset.y.toDouble() - (zoomState.pan.y), (height * zoom) / 2)
+                        convertCanvasCoordinate(offset.y.toDouble() - zoomState.pan.y, (height * zoom) / 2)
 
                     val x = (toCanvasX - (width / 2)) / zoom
                     val y = (toCanvasY - (height / 2)) / zoom
