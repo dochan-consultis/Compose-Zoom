@@ -91,9 +91,17 @@ fun Modifier.zoom(
             zoomState.size = this.size
             detectTapGestures(
                 onTap = { offset ->
-                    val x = (offset.x.toDouble() - zoomState.pan.x) / zoomState.zoom
-                    val y = (offset.y.toDouble() - zoomState.pan.y) / zoomState.zoom
+                    val width = zoomState.size.width
+                    val height = zoomState.size.height
+                    val zoom = zoomState.zoom
 
+                    val toCanvasX =
+                        convertCanvasCoordinate(offset.x.toDouble() - (zoomState.pan.x), (width * zoom) / 2)
+                    val toCanvasY =
+                        convertCanvasCoordinate(offset.y.toDouble() - (zoomState.pan.y), (height * zoom) / 2)
+
+                    val x = (toCanvasX - (width / 2)) / zoom
+                    val y = (toCanvasY - (height / 2)) / zoom
                     onTap?.invoke(TappedPoint(x, y))
                 }
             )
@@ -417,3 +425,10 @@ internal val ZoomState.zoomData: ZoomData
         pan = pan,
         rotation = rotation
     )
+
+
+fun convertCanvasCoordinate(originalValue: Double, maxZoom: Float): Double {
+    val rangeSpan = maxZoom * 2
+    val shiftedValue = originalValue + maxZoom
+    return shiftedValue / rangeSpan * rangeSpan
+}
