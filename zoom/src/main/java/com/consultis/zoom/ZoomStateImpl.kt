@@ -25,7 +25,7 @@ open class ZoomState(
     initialRotation: Float = 0f,
     minZoom: Float = 1f,
     maxZoom: Float = 5f,
-    initialPan: Offset = Offset(x= 0f, y= 0f),
+    initialPan: Offset = Offset(x = 0f, y = 0f),
     internal open val zoomable: Boolean = true,
     internal open val pannable: Boolean = true,
     internal open val rotatable: Boolean = true,
@@ -109,7 +109,11 @@ open class ZoomState(
         snapRotationTo(newRotation)
 
         if (pannable) {
-            val newPan = this.pan * zoom + panChange
+            val notZoomedPan = this.pan + panChange
+            val newPan =
+                if (newZoom >= zoomMax && zoomChange > 1 || newZoom <= zoomMin && zoomChange < 1) notZoomedPan
+                else notZoomedPan * zoomChange
+
             val boundPan = limitPan && !rotatable
 
             if (boundPan) {
