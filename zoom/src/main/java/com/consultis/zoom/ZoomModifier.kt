@@ -9,7 +9,9 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.composed
 import androidx.compose.ui.draw.clipToBounds
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.input.pointer.PointerInputChange
 import androidx.compose.ui.input.pointer.pointerInput
 import com.consultis.zoom.util.TappedPoint
 import com.consultis.zoom.util.update
@@ -69,11 +71,12 @@ fun Modifier.zoom(
                 onGestureEnd = {
                     onGestureEnd?.invoke(zoomState.zoomData)
                 },
-                onGesture = { centroid, pan, zoom, rotation, _, _ ->
+                onGesture = { centroid, pan, zoom, rotation, _, changes ->
+                    val newCentroid = getNewCentroid(changes, centroid)
 
                     coroutineScope.launch {
                         zoomState.updateZoomState(
-                            centroid = centroid,
+                            centroid = newCentroid,
                             panChange = pan,
                             zoomChange = zoom,
                             rotationChange = rotation
@@ -184,11 +187,12 @@ fun Modifier.zoom(
                 onGestureEnd = {
                     onGestureEnd?.invoke(zoomState.zoomData)
                 },
-                onGesture = { centroid, pan, zoom, rotation, _, _ ->
+                onGesture = { centroid, pan, zoom, rotation, _, changes ->
+                    val newCentroid = getNewCentroid(changes, centroid)
 
                     coroutineScope.launch {
                         zoomState.updateZoomState(
-                            centroid = centroid,
+                            centroid = newCentroid,
                             panChange = pan,
                             zoomChange = zoom,
                             rotationChange = rotation
@@ -291,11 +295,12 @@ fun Modifier.zoom(
                 onGestureEnd = {
                     onGestureEnd?.invoke(zoomState.zoomData)
                 },
-                onGesture = { centroid, pan, zoom, rotation, _, _ ->
+                onGesture = { centroid, pan, zoom, rotation, _, changes ->
+                    val newCentroid = getNewCentroid(changes, centroid)
 
                     coroutineScope.launch {
                         zoomState.updateZoomState(
-                            centroid = centroid,
+                            centroid = newCentroid,
                             panChange = pan,
                             zoomChange = zoom,
                             rotationChange = rotation
@@ -431,4 +436,13 @@ fun convertCanvasCoordinate(originalValue: Double, maxZoom: Float): Double {
     val rangeSpan = maxZoom * 2
     val shiftedValue = originalValue + maxZoom
     return shiftedValue / rangeSpan * rangeSpan
+}
+
+private fun getNewCentroid(
+    changes: List<PointerInputChange>,
+    centroid: Offset
+) = if (changes.size == 2) {
+    centroid
+} else {
+    Offset(0f,0f)
 }
